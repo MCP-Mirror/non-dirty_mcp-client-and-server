@@ -1,0 +1,175 @@
+Task List (Test-Driven Approach):
+
+(Note: Tasks marked with [T] indicate a test case should be written before implementation.)
+
+Epic 1: Basic MCP Server Implementation
+
+[ ] Story 1.1: Implement Minimal MCP Server (Mock)
+
+[√] [T] Task 1.1.1: Write test for `initialize` request.
+    *   Task Name: Write test for `initialize` request
+    *   Task State: Completed
+    *   Task Assignee: User
+    *   Task Description:
+        *   Job To Be Done: As a developer, when I implement the `initialize` request handler, I want to have a test in place to verify its behavior, so that I can ensure it conforms to the MCP specification.
+        *   Paragraph Description: Write a unit test that sends an `initialize` request to the mock server and asserts that the response conforms to the MCP spec, including the `capabilities`, `protocolVersion`, and `serverInfo` fields. The test should check for successful initialization and proper handling of invalid requests (e.g., missing required parameters).
+    *   Success Criteria:
+        *   Given: A mock MCP server and a test framework are set up.
+        *   When: The test for the `initialize` request is executed.
+        *   Then: The test passes if the mock server responds correctly to valid and invalid initialize requests, according to the MCP spec. The test should specifically check for the presence and correctness of `capabilities`, `protocolVersion`, and `serverInfo` fields in the response. It should also handle and verify the server's response to invalid requests.
+
+[√] Task 1.1.2: Implement `initialize` request handler.
+    *   Task Name: Implement `initialize` request handler
+    *   Task State: Completed
+    *   Task Assignee: User
+    *   Task Description:
+        *   Job To Be Done: As a user, when I start an MCP client, I need the server to respond to the initialize request correctly, to establish the connection and negotiate capabilities according to the MCP spec.
+        *   Paragraph Description: Implement the server-side handler for the `initialize` request. This handler should return a valid `InitializeResult` according to the MCP specification, including the server's capabilities, protocol version, and server info. For a mock server, these can be placeholder values.
+    *   Success Criteria:
+        *   Given: An MCP client sends a valid `initialize` request to the server.
+        *   When: The server receives the request.
+        *   Then: The server responds with a valid `InitializeResult` as defined in the MCP specification. The response should include the server's capabilities, protocol version, and server info.
+
+[√] [T] Task 1.1.3: Write test for `ping` request.
+    *   Task Name: Write test for `ping` request
+    *   Task State: Completed
+    *   Task Assignee: User
+    *   Task Description:
+        *   Job To Be Done: As a developer, when I implement the `ping` request handler, I want to have a test to verify it responds correctly, so that I can ensure basic server responsiveness.
+        *   Paragraph Description: Write a unit test that sends a `ping` request to the server and checks that it receives a valid (empty) response. The test should verify that the server is reachable and responsive.
+    *   Success Criteria:
+        *   Given: A mock MCP server and a test framework are set up.
+        *   When: The test for the `ping` request is executed.
+        *   Then: The test passes if the server responds to the `ping` request with a valid (empty) response, indicating it is reachable and responsive. It should also correctly handle any invalid request parameters and return appropriate error responses, if applicable (as defined by the MCP spec).
+
+[√] Task 1.1.4: Implement `ping` request handler.
+    *   Task Name: Implement `ping` request handler
+    *   Task State: Completed
+    *   Task Assignee: User
+    *   Task Description:
+        *   Job To Be Done: As a user, when I want to check if an MCP server is alive, I want to be able to send a ping and get a response to confirm, so I can monitor the server status.
+        *   Paragraph Description: Implement the `ping` request handler on the server. This handler should respond with an empty result, acknowledging receipt of the ping.
+    *   Success Criteria:
+        *   Given: An MCP client sends a valid `ping` request.
+        *   When: The server receives the `ping` request.
+        *   Then: The server sends back an empty response acknowledging the ping.
+
+[√] [T] Task 1.1.5: Write test for `resources/list` request (empty response).
+    *   Task Name: Write test for `resources/list` request (empty response)
+    *   Task State: Completed
+    *   Task Assignee: User
+    *   Task Description:
+        *   Job To Be Done: As a developer, I want to have a test verifying that the server correctly handles requests to list resources when no resources are available, to ensure proper behavior in this scenario.
+        *   Paragraph Description:  Write a test that sends a `resources/list` request and verifies that the server returns an empty list of resources. This test covers the case where the server is functioning correctly but has no resources to report.
+    *   Success Criteria:
+        *   Given: The mock server has no resources defined.
+        *   When: A client sends a `resources/list` request.
+        *   Then: The server responds with a valid MCP response containing an empty list of resources (`resources` field should be an empty array).
+
+[√] Task 1.1.6: Implement `resources/list` request handler (empty).
+    *   Task Name: Implement `resources/list` request handler (empty)
+    *   Task State: Completed
+    *   Task Assignee: User
+    *   Task Description:
+        *   Job To Be Done: As a developer, I want the server to respond appropriately when a user or client requests to list resources, even if there are no resources available to return, so they can know the server handled the request and the list is empty.
+        *   Paragraph Description: Implement the server's `resources/list` request handler. For the mock server, this should return an empty list of resources. 
+    *   Success Criteria:
+        *   Given: The server is running in mock mode.
+        *   When:  A client sends a valid `resources/list` request.
+        *   Then: The server responds with a valid MCP response containing an empty list of resources.
+
+[√] [T] Task 1.1.7: Write test for `prompts/list` request (empty).
+    * Task Name: Write test for `prompts/list` request (empty)
+    * Task State: Completed
+    * Task Assignee: User
+    * Task Description:
+        * Job To Be Done: As a developer, I want a test that confirms the server's proper handling of requests to list prompts when none are available, so that client applications behave as expected.
+        * Paragraph Description: Write a unit test that sends a `prompts/list` request to the server and asserts that an empty list is returned, ensuring the server correctly manages cases where no prompts are offered.
+    * Success Criteria:
+        * Given: The mock server is running and has no prompts defined.
+        * When: A `prompts/list` request is sent to the mock server.
+        * Then: The server responds with a valid MCP response containing an empty list of prompts, demonstrating the correct handling of requests for nonexistent prompts.
+
+[√] Task 1.1.8: Implement `prompts/list` request handler (empty).
+    * Task Name: Implement `prompts/list` request handler (empty)
+    * Task State: Completed
+    * Task Assignee: User
+    * Task Description:
+        * Job To Be Done: As a server developer, when receiving a `prompts/list` request, I want to provide a valid response indicating an empty list if no prompts are available, so the client can gracefully handle the lack of prompts.
+        * Paragraph Description: Implement the `prompts/list` request handler on the server to return a valid (but empty) list when no prompts are available, adhering to the MCP specification for a consistent client experience.
+    * Success Criteria:
+        * Given: A running mock server without any defined prompts.
+        * When: A valid `prompts/list` request is received by the server.
+        * Then: The server returns a valid MCP response with an empty prompts list, complying with the spec and ensuring the client understands no prompts are present.
+
+[√] [T] Task 1.1.9: Write test for `tools/list` request (empty).
+    * Task Name: Write test for `tools/list` request (empty)
+    * Task State: Completed
+    * Task Assignee: User
+    * Task Description:
+        * Job To Be Done: As a developer implementing a mock MCP server, I need a test to verify the server's proper handling of `tools/list` requests when no tools are available, so that I can ensure correct server behavior according to the MCP specification.
+        * Paragraph Description: Write a test case that sends a `tools/list` request to the mock MCP server and checks that the response correctly indicates an empty list, ensuring the server's handling of empty tool lists is compliant with the MCP protocol.
+    * Success Criteria:
+        * Given: A mock MCP server without any defined tools is running.
+        * When: The server receives a valid `tools/list` request.
+        * Then: The server returns a valid MCP response with an empty list of tools, satisfying the MCP specification for empty lists and signaling the absence of tools.
+
+[√] Task 1.1.10: Implement `tools/list` request handler (empty).
+    * Task Name: Implement `tools/list` request handler (empty)
+    * Task State: Completed
+    * Task Assignee: User
+    * Task Description:
+        * Job To Be Done: As a mock server developer, when I receive a `tools/list` request, I want to send a valid, empty list response if no tools are available, so that the client receives a consistent and compliant response according to the MCP specification.
+        * Paragraph Description: Create the implementation for the mock server's `tools/list` handler that specifically returns an empty list when called, ensuring adherence to the MCP protocol for requests when no tools exist on the server.
+    * Success Criteria:
+        * Given: The mock MCP server has no defined tools.
+        * When: A `tools/list` request is sent to the server.
+        * Then: The server returns an empty list of tools as part of a valid MCP response, fulfilling the protocol's requirement for empty lists and confirming the absence of tools to the client.
+
+[√] [T] Task 1.1.11: Write test for `resources/read` request (failure case).
+    *   Task Name: Write test for `resources/read` request (failure case)
+    * Task State: Completed
+    *   Task Assignee: User
+    *   Task Description:
+        *   Job To Be Done: As a developer of the mock server, I want to test its behavior when a client attempts to read a non-existent resource, so that I can ensure it returns the correct error response according to the MCP specification.
+        *   Paragraph Description: Write a unit test that sends a `resources/read` request for a URI that is not expected to exist on the mock server. Verify that the server responds with an appropriate MCP error response (e.g., "resource not found").
+    *   Success Criteria:
+        *   Given: The mock server is running.
+        *   When: A client sends a `resources/read` request for a non-existent resource.
+        *   Then: The server responds with a valid MCP error response indicating that the requested resource was not found. The error code and message should comply with the MCP specification for resource not found errors.
+
+[√] Task 1.1.12: Implement `resources/read` request handler (returns error).
+    *   Task Name: Implement `resources/read` request handler (returns error)
+    *   Task State: Completed
+    *   Task Assignee: User
+    *   Task Description:
+        *   Job To Be Done: As a mock server developer, when I receive a `resources/read` request, I want to send back an MCP compliant "resource not found" error, so that the client understands the resource isn't available and can handle it appropriately.
+        *   Paragraph Description: Implement the server-side `resources/read` handler so it returns an MCP compliant error when a resource is not found. This ensures clients will receive expected error behavior in the mock server context.
+    *   Success Criteria:
+        *   Given: A client sends a `resources/read` request for a resource that doesn't exist on the mock server.
+        *   When: The server receives the request.
+        *   Then: The server returns a valid MCP error response with an appropriate error code and message indicating that the resource could not be found.
+
+[√] [T] Task 1.1.13: Write test for unsupported methods (error).
+    *   Task Name: Write test for unsupported methods (error)
+    *   Task State: Completed
+    *   Task Assignee: User
+    *   Task Description:
+        *   Job To Be Done: As a developer implementing the mock server, I want to test that it returns the correct error when a client sends a request for an unsupported method, so that I can ensure conformance to the MCP spec and proper error handling.
+        *   Paragraph Description:  Write tests that send requests to the mock server using method names that are not defined in the MCP specification. The tests should verify that the server responds with an appropriate "method not found" error.
+    *   Success Criteria:
+        *   Given: The mock server is configured to handle only specific MCP methods.
+        *   When: The server receives a request with an unsupported method name.
+        *   Then: The server responds with a valid MCP error response, including an appropriate error code and a message indicating that the method is not found or supported, according to the MCP specification.
+
+[√] Task 1.1.14: Implement error handling for unsupported methods.
+    *   Task Name: Implement error handling for unsupported methods
+    *   Task State: Completed
+    *   Task Assignee: User
+    *   Task Description:
+        *   Job To Be Done: As a mock server developer, I need to handle requests with methods that are not supported according to the MCP spec so I can return a proper error response, so that clients can correctly handle unsupported method calls.
+        *   Paragraph Description:  Implement a default error handler on the server. This should intercept any requests for methods that aren't explicitly handled by the mock server and return an "unsupported method" MCP error response. This ensures the server always responds in a well-defined manner, even to invalid requests.
+    *   Success Criteria:
+        *   Given: The mock server receives a request with an unsupported method.
+        *   When: The request is processed.
+        *   Then: The server responds with a valid MCP error response indicating that the method is not supported. The error message and code should comply with the MCP spec.
